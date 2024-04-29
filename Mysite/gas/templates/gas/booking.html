@@ -1,0 +1,148 @@
+{% if lastorder > 0  %}
+     <script>
+	    alert('You have Ordered Cylinder within last two weeks. Please try on another days');
+        window.location=("{% url 'dashboard' %}");
+     </script>
+{% endif %}
+
+{% if error == "no" %}
+     <script>
+	   alert('Ordered Successfully');
+        {% if paymode == "upi" %}
+            window.location=("{% url 'payment' order.id  %}");
+        {% endif %}
+        {% if paymode == "cashondelivery" %}
+            window.location=("{% url 'view_orders' %}");
+        {% endif %}
+     </script>
+{% endif %}
+
+{% if error == "yes" %}
+     <script>
+	    alert('Something went wrong, Try Again');
+     </script>
+{% endif %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gas Booking Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 56px; /* Adjusted for navbar height */
+            min-height: 100vh; /* Full viewport height */
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .container {
+            flex: 1; /* To make sure footer is pushed down */
+            margin-top: 50px; /* Adjusted for navbar height */
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dashboard' %}">Home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>Indian Gas Booking System</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block content %}
+    <div class="container">
+        <br>
+        <h2>Gas Booking Form</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="paymode">Payment Mode</label>
+                <select class="form-control" id="paymode" name="paymode" onchange="calculateTotal()">
+                    <option value="cashondelivery">Cash on Delivery</option>
+                    <option value="upi">UPI</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="totalAmount">Amount of Cylinder</label>
+                <input type="text" class="form-control" id="totalAmount" name="totalAmount" readonly>
+            </div>
+            {% if products.quantity > 0  %}
+                <button type="submit" class="btn btn-primary">Order Now</button>
+            {% endif %}
+        </form>
+        <br>
+    </div>
+    {% endblock %}
+    <div class="footer mt-auto">
+        &copy; 2024 Gas Cylinder Booking System
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- ... your HTML code ... -->
+
+<script>
+    function calculateTotal() {
+        var quantity = 1;
+        var numord = {% if last_month_orders %}{{ last_month_orders }}{% else %}0{% endif %};
+        var price = {{ products.price|floatformat:2 }};
+        var subsidy = {{ products.subsidy }};
+        var totalAmount;
+
+        if (numord == 0) {
+            totalAmount = price * quantity;
+            totalAmount -= (totalAmount * (subsidy / 100));
+        } 
+        else {
+            totalAmount = quantity * price;
+        }
+
+        document.getElementById("totalAmount").value = totalAmount.toFixed(2);
+    }
+</script>
+
+<!-- ... your HTML code ... -->
+
+</body>
+</html>
+

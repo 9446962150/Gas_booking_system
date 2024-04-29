@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Feedback</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .container {
+            margin-top: 50px;
+        }
+
+        .header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            color: #555;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .banner {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .banner h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .home-btn {
+            position: absolute;
+            top: 60px; /* Adjusted position */
+            left: 20px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 60px; /* Adjusted position */
+            right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <h1>Indian Gas Booking System</h1>
+    </div>
+
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Submit Feedback</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary home-btn">Home</a>
+    <a href="{% url 'user-logout' %}" class="btn btn-secondary logout-btn">Logout</a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form method="post" action="{% url 'feedback_submission' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="feedback-description">Feedback Description:</label>
+                        <textarea class="form-control" id="feedback-description" name="description" rows="5" placeholder="Enter your feedback here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit-btn">Submit Feedback</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Gas Cylinder Booking System</p>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

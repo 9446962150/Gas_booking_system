@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa; /* Set your preferred background color */
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        footer p {
+            font-size: 14px;
+        }
+        
+
+        header {
+            background-color: #343a40; /* Set your preferred background color */
+            padding: 20px 0;
+        }
+
+        header h1 {
+            color: #fff; /* Set your preferred text color */
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff; /* Set your preferred text color */
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #007bff; /* Set your preferred hover text color */
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .feature-box {
+            width: 300px;
+            height: 200px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .feature-box:hover {
+            transform: scale(1.05); /* Add a slight scale effect on hover for interaction */
+        }
+
+        .feature-box h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #343a40; /* Set your preferred text color */
+        }
+
+        .feature-box p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff; /* Set your preferred button background color */
+            color: #fff; /* Set your preferred button text color */
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3; /* Set your preferred hover button background color */
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to the Admin Panel</h1><br>
+    <nav>
+        <ul>
+            <li><a href="{% url 'admindashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'customer-details' %}">View Customers</a></li>
+            <li><a href="{% url 'view_products' %}">View Product</a></li>
+            <li><a href="{% url 'everyorders' %}">Manage Orders</a></li>
+            <li><a href="{% url 'view_feedback' %}">View Feedback</a></li>
+            <li><a href="{% url 'user-logout' %}">Logout</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+</header>
+{% block content %}
+        
+<main>
+    <section class="dashboard">
+        <div class="feature-box">
+            <h2>Create New Customer</h2>
+            <p>Add a new Customer user to the system.</p>
+            <a href="{% url 'register' %}" class="button">Create Customer</a><br>
+            <a href="{% url 'customer-details' %}">{{ count }} Customers exist</a>
+        </div>
+        <div class="feature-box">
+            <h2>Add Cylinder</h2>
+            <p>Add more cylinder to the gas system.</p>
+            <a href="{% url 'editproduct' %}" class="button">Add Cylinder </a>
+        </div>
+        <!-- Add more feature boxes as needed -->
+    </section>
+</main>
+
+{% endblock %}
+<footer id="footer">
+    <p>&copy; {% now "Y" %} Indian Gas Booking System. All rights reserved.</p>
+</footer>
+</body>
+</html>

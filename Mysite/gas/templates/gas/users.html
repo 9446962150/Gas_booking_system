@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 56px; /* Adjusted for navbar height */
+            min-height: 100vh; /* Full viewport height */
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .container {
+            flex: 1; /* To make sure footer is pushed down */
+            margin-top: 50px; /* Adjusted for navbar height */
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .update-button,
+        .change-password-button {
+            margin-top: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'userdetails' %}">User Details<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>Indian Gas Booking System</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <br>
+        {% block content %}
+        <div class="row">
+            {% for user in users %}
+            <div class="col-md-8 offset-md-2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>Username: {{ user.username }}</strong></h5>
+                        <p class="card-text">
+                            <strong>Email:</strong> {{ user.email }}<br>
+                            <strong>First Name:</strong> {{ user.first_name }}<br>
+                            <strong>Last Name:</strong> {{ user.last_name }}<br>
+                            <strong>Address:</strong> {{ user.userprofile.address }}<br>
+                            <strong>Mobile:</strong> {{ user.userprofile.mobile }}<br><br>
+                            <a href="{% url 'edituser' %}" class="btn btn-sm btn-primary update-button">Update Details</a>
+                            <a href="{% url 'editpassword' %}" class="btn btn-sm btn-primary change-password-button">Change Password</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p>No user details available.</p>
+            </div>
+            {% endfor %}
+        </div>
+            {% endblock %}
+    </div>
+
+    <div class="footer mt-auto">
+        &copy; 2024 Gas Cylinder Booking System
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

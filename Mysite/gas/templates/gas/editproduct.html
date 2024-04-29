@@ -1,0 +1,32 @@
+{% extends "gas/admindashboard.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if error %}
+            <div class="alert alert-success" role="alert">
+                Data has been Updated
+            </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <h1>Current Gas Details</h1>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="text" class="form-control" name="price" value="{{products.price}}">
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="Number" class="form-control" name="quantity" min=0 value="{{products.quantity}}">
+                </div>
+                <div class="form-group">
+                    <label>Subsidy</label>
+                    <input type="text" class="form-control" name="subsidy" value="{{products.subsidy}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form><br>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .container {
+            margin-top: 50px;
+        }
+
+        .header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            color: #555;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .feature-tile {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            height: 100%;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .banner {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .banner h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <h1>Indian Gas Booking System</h1>
+    </div>
+
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>Welcome to Your Dashboard, {{ request.user.username }}</h1>
+                </div>
+                <div class="col-md-4 text-right">
+                    <a href="{% url 'user-logout' %}" class="btn btn-danger logout-btn">Logout</a>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="feature-tile">
+                        <h4>Book a Gas Cylinder</h4>
+                        <p>Book a gas cylinder to be delivered to your address.</p><br>
+                        <a href="{% url 'booking' %}" class="btn btn-light">Book Now</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-tile">
+                        <h4>View Your Orders</h4>
+                        <p>View your previous gas cylinder orders and track their status.</p>
+                        <a href="{% url 'view_orders' %}" class="btn btn-light">View Orders</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-tile">
+                        <h4>Manage Account</h4>
+                        <p>Update your profile information and manage your account settings.</p>
+                        <a href="{% url 'userdetails' %}" class="btn btn-light">Manage Account</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-tile">
+                        <h4>Submit Feedback</h4>
+                        <p>Provide your feedback to help us improve our services.</p><br>
+                        <a href="{% url 'feedback_submission' %}" class="btn btn-light">Submit Feedback</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Main content area can be added here -->
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Gas Cylinder Booking System</p>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

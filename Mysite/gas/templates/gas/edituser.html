@@ -1,0 +1,55 @@
+{% extends "gas/users.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if error %}
+            <div class="alert alert-success" role="alert">
+                Data has been Updated
+            </div>
+            {% endif %}
+            <form method="post" onsubmit="return MobileValidate()">
+                {% csrf_token %}
+                <h1>Edit Details</h1>
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" value="{{user.first_name}}">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="{{user.last_name}}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" value="{{user.userprofile.address}}">
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile</label>
+                    <input type="text" class="form-control" id="mobile" name="mobile" value="{{user.userprofile.mobile}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form><br>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function MobileValidate() {
+        var contact = document.getElementById("mobile").value;
+        var contactTenDigit = /^\d{10}$/;
+        if (contact != '') {
+            if (contact.match(contactTenDigit)) {
+                return true;
+            } else {
+                alert("Enter Ten Digit Mobile Number");
+                return false;
+            }
+        }
+    }
+</script>
+{% endblock %}

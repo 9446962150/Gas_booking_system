@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gas Cylinder Booking System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .jumbotron {
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 100px 0;
+            margin-bottom: 0;
+            position: relative;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .buttons-container {
+            position: absolute;
+            top: 30px; /* Adjusted position */
+            right: 20px;
+        }
+        .card-columns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .card {
+            flex: 0 0 calc(33.33% - 20px);
+            max-width: calc(33.33% - 20px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Indian Gas Cylinder Booking System</h1>
+    <p class="lead">Your convenient solution for booking gas cylinders online.</p>
+    <hr class="my-4">
+    <div class="buttons-container">
+        <a href="{% url 'about' %}" class="btn btn-primary btn-lg">About</a>
+        <a href="{% url 'my-login' %}" class="btn btn-success btn-lg">User Login</a>
+        <a href="{% url 'adminlogin' %}" class="btn btn-success btn-lg">Admin Login</a>
+    </div>
+    <h2>Our Services </h2>
+    <div class="container">
+        <div class="card-columns">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Real Time</h5>
+                    <p class="card-text">Real time availability of gas cylinders</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Convenient Booking</h5>
+                    <p class="card-text">Convenient and simple cylinder booking</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Fast</h5>
+                    <p class="card-text">Faster and ubiquitous services </p>
+                </div>
+            </div>
+        </div>
+        <p bgcolor="red">Only Few stocks are available! Hurry Up !!</p>
+    </div>
+</div>
+
+
+<div class="footer">
+    <p>&copy; 2024 Gas Cylinder Booking System</p>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

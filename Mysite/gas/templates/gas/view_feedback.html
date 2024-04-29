@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Feedback</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa; /* Set your preferred background color */
+        }
+
+        main {
+            flex: 1;
+        }
+
+        header {
+            background-color: #343a40; /* Set your preferred background color */
+            padding: 20px 0;
+            color: #fff; /* Set your preferred text color */
+        }
+
+        header h1 {
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff; /* Set your preferred text color */
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #007bff; /* Set your preferred hover text color */
+        }
+
+        .feedback-table {
+            margin-top: 30px;
+        }
+
+        .feedback-table th,
+        .feedback-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        .feedback-table th {
+            background-color: #343a40; /* Set your preferred table header background color */
+            color: #fff; /* Set your preferred table header text color */
+        }
+
+        .feedback-table td {
+            background-color: #fff;
+        }
+
+        footer {
+            background-color: #343a40; /* Set your preferred footer background color */
+            color: #fff; /* Set your preferred footer text color */
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>View Feedback</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'admindashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'customer-details' %}">View Customers</a></li>
+            <li><a href="{% url 'view_products' %}">View Product</a></li>
+            <li><a href="{% url 'everyorders' %}">Manage Orders</a></li>
+            <li><a href="{% url 'view_feedback' %}">View Feedback</a></li>
+            <li><a href="{% url 'user-logout' %}">Logout</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="container feedback-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th> User Feedback </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{ feedback.User }}</td>
+                    <td>{{ feedback.description }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">No feedbacks available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; {% now "Y" %} Indian Gas Booking System. All rights reserved.</p>
+</footer>
+</body>
+</html>

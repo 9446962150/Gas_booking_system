@@ -1,0 +1,32 @@
+{% extends "gas/admindashboard.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Gas Details</h2>
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-bordered">
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ product.price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantity / Stock </th>
+                        <td>{{ product.quantity }}</td>
+                    </tr>
+                    <tr>
+                        <th>Subsidy</th>
+                        <td>{{ product.subsidy }} %</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<center><a href="{% url 'editproduct' %}"><button>Edit</button></a></center>
+<br>
+{% endblock %}
